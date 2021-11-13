@@ -108,7 +108,7 @@ public class RectangleAStudentTester {
 
 
 		System.out.println("testing getDiagonalLength:");
-		RectangleA r9 = new RectangleA(5, 5);
+		RectangleA r9 = new RectangleA(4, 3);
 		double d = r9.getDiagonalLength();
 		if (Math.abs(d - 5) > EPSILON)
 			System.out.println("\t ERROR - getDiagonalLength on point Width=4 Height=3 PointSW=(0,0) expected 5.0 ; actual=" + d);

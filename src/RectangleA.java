@@ -4,9 +4,9 @@ public class RectangleA {
     private int _height;
     private Point _pointSW;
     private Point _pointNE;
-
     public RectangleA(int w, int h) {
         this._pointSW = new Point(0, 0);
+        this.getPointNE();
         if (w < 0) {
             this._width = 1;
         } else {
@@ -25,6 +25,8 @@ public class RectangleA {
         this(w, h);
         if (p != null) {
             this._pointSW = p;
+            this.getPointNE();
+
         }
 
     }
@@ -119,6 +121,6 @@ public class RectangleA {
     }
 
     public boolean isIn(RectangleA r) {
-
+        return ( (this._width<=r._width) && (this._height<=r._height) && (r._pointSW.getX()+this._width <=r._pointNE.getX()) && (r._pointSW.getY() + this._height<=r._pointNE.getY()));
     }
 }
