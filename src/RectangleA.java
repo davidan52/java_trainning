@@ -4,28 +4,28 @@ public class RectangleA {
     private int _height;
     private Point _pointSW;
     private Point _pointNE;
+    private final  int DEFAULT_VALUE = 1;
+
     public RectangleA(int w, int h) {
-        this._pointSW = new Point(0, 0);
-        this.getPointNE();
         if (w < 0) {
             this._width = 1;
         } else {
             this._width = w;
         }
-
         if (h < 0) {
             this._height = 1;
         } else {
             this._height = h;
         }
-
+        this._pointSW = new Point(0, 0);
+        this._pointNE = new Point(this.getPointNE()) ;
     }
 
     public RectangleA(Point p, int w, int h) {
         this(w, h);
         if (p != null) {
-            this._pointSW = p;
-            this.getPointNE();
+            this._pointSW = new Point(p);
+            this._pointNE = new Point(this.getPointNE());
 
         }
 
@@ -54,7 +54,7 @@ public class RectangleA {
     }
 
     public Point getPointSW() {
-        return this._pointSW;
+        return new Point(this._pointSW);
     }
 
     public void setWidth(int w) {
@@ -93,15 +93,14 @@ public class RectangleA {
 
     public void move(int deltaX, int deltaY) {
         this._pointSW.move(deltaX, deltaY);
-//        this._pointNE.move(deltaX, deltaY);
     }
 
     public boolean equals(RectangleA other) {
         return this.toString().equals(other.toString());
     }
-
+//    cancel calculate
     public double getDiagonalLength() {
-        return Math.sqrt((double)(this._height * this._height + this._width * this._width));
+        return this._pointNE.distance(_pointSW);
     }
 
     public boolean isLarger(RectangleA other) {
@@ -121,6 +120,20 @@ public class RectangleA {
     }
 
     public boolean isIn(RectangleA r) {
-        return ( (this._width<=r._width) && (this._height<=r._height) && (r._pointSW.getX()+this._width <=r._pointNE.getX()) && (r._pointSW.getY() + this._height<=r._pointNE.getY()));
+        return (this._width<=r._width && this._height<=r._height
+                && this._pointSW.getX()>=r._pointSW.getX()&&this._pointNE.getX()<=r._pointNE.getX()
+                &&this._pointSW.getY()>=r._pointSW.getY()&&this._pointNE.getY()<=r._pointNE.getY());
     }
-}
+    public boolean overlap (RectangleA r){
+        if (this._pointNE.isUnder(r._pointSW)
+            || this._pointSW.isAbove(r._pointNE)) {
+            return false;
+        }if(this._pointNE.isLeft(r._pointSW)
+            || this._pointSW.isRight(r._pointNE)) {
+            return false;
+        }return true;
+        }
+    }
+
+
+

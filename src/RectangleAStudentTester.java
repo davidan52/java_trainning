@@ -154,15 +154,15 @@ public class RectangleAStudentTester {
 		else
 			System.out.println("\t OK - r9.isIn(r10) expected true ; actual=" + r9.isIn(r10) + ";  r9=" + r9 + " r10=" + r10);
 
-//
-//		System.out.println("testing overlap:");
-//		RectangleA r11 = new RectangleA(new Point(-1,-2),3,5);
-//		if (!r11.overlap(r9))
-//			System.out.println("\t ERROR - r11.overlap(r9) expected true ; actual=" + r11.overlap(r9) + ";  r9=" + r9 + " r11=" + r11);
-//		else
-//			System.out.println("\t OK - r11.overlap(r9) expected true ; actual=" + r11.overlap(r9) + ";  r9=" + r9 + " r11=" + r11);
-//
-//        System.out.println("********** Test Q2 RectangleA - Finished **********\n");
-//	}
+
+		System.out.println("testing overlap:");
+		RectangleA r11 = new RectangleA(new Point(-1,-2),3,5);
+		if (!r11.overlap(r9))
+			System.out.println("\t ERROR - r11.overlap(r9) expected true ; actual=" + r11.overlap(r9) + ";  r9=" + r9 + " r11=" + r11);
+		else
+		System.out.println("\t OK - r11.overlap(r9) expected true ; actual=" + r11.overlap(r9) + ";  r9=" + r9 + " r11=" + r11);
+
+        System.out.println("********** Test Q2 RectangleA - Finished **********\n");
 	}
 }
+

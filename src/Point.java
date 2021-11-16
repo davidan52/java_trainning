@@ -9,14 +9,8 @@ public class Point {
     private final int DEFAULT_VALUE = 0;
 
     public Point(int x, int y) {
-//        if (x >= 0 && y >= 0) {
-            this._x = x;
+            this._x =  x;
             this._y = y;
-//        } else if (x < 0) {
-//            this._x = 0;
-//        } else {
-//            this._y = 0;
-//        }
 
     }
 
