@@ -1,21 +1,33 @@
 public class Main {
 
     public static void main(String[] args) {
-        Point pointA = new Point(3,4);
-       Point pointB = new Point(2,1);
+        Point pointA = new Point(2,1);
+       Point pointB = new Point(4,2);
+       Point point_to_set = new Point(1,5);
 //        pointA.distance(pointB);
 ////        System.out.println(pointA.isUnder(pointB));
-        RectangleA r = new RectangleA(pointB,5,4);
+        RectangleA num1 = new RectangleA(pointA,5,4);
 //        System.out.print(r.getPointSW());
-        RectangleA num2 = new RectangleA(pointA,2,5);
-//        num2.getPointNE();
-        Point TEST=num2.getPointSW();
-        TEST.setY(2);
+        RectangleA num2 = new RectangleA(null,1,2);
+        num2.setPointSW(point_to_set);
+        System.out.print(num1.getPointSW());
+        System.out.print(num1.getPointNE());
         System.out.print(num2.getPointSW());
-        System.out.print(TEST);
-//        Point ne =new Point(num2.getPointNE());
-//        System.out.print(ne);
-        boolean x = num2.isIn(r);
+        System.out.print(num2.getPointNE());
+        System.out.print("----------------------------");
+        System.out.print(num2.isIn(num1));
+        System.out.print("----------------------------");
+        System.out.print(num2.overlap(num1));
+
+
+
+//        Point TEST=num2.getPointSW();
+//        TEST.setY(2);
+//        System.out.print(num2.getPointSW());
+//        System.out.print(TEST);
+////        Point ne =new Point(num2.getPointNE());
+////        System.out.print(ne);
+//        boolean x = num2.isIn(num1);
 //        this._width<=r._width && this._height<=r._height && r._pointSW.getX()+this._width <=r._pointNE.getX()
 //        int test1 = num2.getWidth();
 //        int test0 = r.getWidth();
