@@ -3,29 +3,27 @@ public class RectangleA {
     private int _width;
     private int _height;
     private Point _pointSW;
-    private Point _pointNE;
     private final int DEFAULT_VALUE = 1;
+    private final int INVALID_VALUE = 0;
 
     public RectangleA(int w, int h) {
-        if (w < 0) {
+        if (w <= INVALID_VALUE) {
             this._width = DEFAULT_VALUE;
         } else {
             this._width = w;
         }
-        if (h < 0) {
+        if (h <= INVALID_VALUE) {
             this._height = DEFAULT_VALUE;
         } else {
             this._height = h;
         }
         this._pointSW = new Point(0, 0);
-        this._pointNE = new Point(this.getPointNE());
     }
 
     public RectangleA(Point p, int w, int h) {
         this(w, h);
         if (p != null) {
             this._pointSW = new Point(p);
-            this._pointNE = new Point(this.getPointNE());
 
         }
 
@@ -35,13 +33,11 @@ public class RectangleA {
         this._width = ne.getX() - sw.getX();
         this._height = ne.getY() - sw.getY();
         this._pointSW = new Point(sw);
-        this._pointNE = new Point(ne);
     }
 
     public RectangleA(RectangleA r) {
         this._width = r._width;
         this._height = r._height;
-        this._pointNE = new Point(r._pointNE);
         this._pointSW = new Point(r._pointSW);
     }
 
@@ -58,7 +54,7 @@ public class RectangleA {
     }
 
     public void setWidth(int w) {
-        if (w < 0) {
+        if (w <= INVALID_VALUE) {
             System.out.println("Invalid Width");
         } else {
             this._width = w;
@@ -67,7 +63,7 @@ public class RectangleA {
     }
 
     public void setHeight(int h) {
-        if (h < 0) {
+        if (h <= INVALID_VALUE) {
             System.out.println("Invalid Height");
         } else {
             this._height = h;
@@ -100,7 +96,7 @@ public class RectangleA {
     }
 
     public double getDiagonalLength() {
-        return this._pointNE.distance(_pointSW);
+        return getPointNE().distance(_pointSW);
     }
 
     public boolean isLarger(RectangleA other) {
@@ -108,10 +104,11 @@ public class RectangleA {
     }
 
     public Point getPointNE() {
+        Point pointNe;
         int neX = this._pointSW.getX() + this._width;
         int neY = this._pointSW.getY() + this._height;
-        this._pointNE = new Point(neX, neY);
-        return this._pointNE;
+        pointNe = new Point(neX, neY);
+        return pointNe;
     }
 
     public void changeSides() {
@@ -122,17 +119,17 @@ public class RectangleA {
 
     public boolean isIn(RectangleA r) {
         return (this._width <= r._width && this._height <= r._height
-                && this._pointSW.getX() >= r._pointSW.getX() && this._pointNE.getX() <= r._pointNE.getX()
-                && this._pointSW.getY() >= r._pointSW.getY() && this._pointNE.getY() <= r._pointNE.getY());
+                && this._pointSW.getX() >= r._pointSW.getX() && this.getPointNE().getX() <= r.getPointNE().getX()
+                && this._pointSW.getY() >= r._pointSW.getY() && this.getPointNE().getY() <= r.getPointNE().getY());
     }
 
     public boolean overlap(RectangleA r) {
-        if (this._pointNE.isUnder(r._pointSW)
-                || this._pointSW.isAbove(r._pointNE)) {
+        if (this.getPointNE().isUnder(r._pointSW)
+                || this._pointSW.isAbove(r.getPointNE())) {
             return false;
         }
-        else if (this._pointNE.isLeft(r._pointSW)
-                || this._pointSW.isRight(r._pointNE)) {
+        else if (this.getPointNE().isLeft(r._pointSW)
+                || this._pointSW.isRight(r.getPointNE())) {
             return false;
         } else {
             return true;
