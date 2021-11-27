@@ -79,6 +79,8 @@ public class RectangleA {
     }
 
     /**
+     * return rectangle width
+     *
      * @return Rectangle width
      */
     public int getWidth() {
@@ -86,6 +88,8 @@ public class RectangleA {
     }
 
     /**
+     * return rectangle height
+     *
      * @return Rectangle height
      */
 
@@ -94,6 +98,8 @@ public class RectangleA {
     }
 
     /**
+     * return pointSW value
+     *
      * @return Point object pointSW of the Rectangle
      */
     public Point getPointSW() {
@@ -138,6 +144,8 @@ public class RectangleA {
     }
 
     /**
+     * Rectangle attributes in a string format
+     *
      * @return Rectangle attributes in a string format
      */
     public String toString() {
@@ -145,6 +153,8 @@ public class RectangleA {
     }
 
     /**
+     * return Rectangle perimeter
+     *
      * @return Rectangle perimeter
      */
     public int getPerimeter() {
@@ -152,6 +162,8 @@ public class RectangleA {
     }
 
     /**
+     * return Rectangle area
+     *
      * @return Rectangle area
      */
 
@@ -180,6 +192,8 @@ public class RectangleA {
     }
 
     /**
+     * return diagonal length between the sw point to the ne point
+     *
      * @return Rectangle diagonalLength
      */
     public double getDiagonalLength() {
@@ -197,6 +211,8 @@ public class RectangleA {
     }
 
     /**
+     * returns pointNE value
+     *
      * @return Point object pointNE
      */
     public Point getPointNE() {

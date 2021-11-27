@@ -31,6 +31,8 @@ public class Point {
     }
 
     /**
+     * return x-coordinate value
+     *
      * @return Point x-coordinate
      */
     public int getX() {
@@ -38,6 +40,8 @@ public class Point {
     }
 
     /**
+     * return y-coordinate value
+     *
      * @return Point y-coordinate
      */
     public int getY() {
@@ -63,6 +67,8 @@ public class Point {
     }
 
     /**
+     * return point coordinates in string format
+     *
      * @return Point attributes in a string format
      */
     public String toString() {
@@ -131,6 +137,8 @@ public class Point {
     }
 
     /**
+     * return the distance between two points
+     *
      * @param p Point  object for distance check
      * @return the distance between two points
      */
