@@ -1,8 +1,8 @@
 /**
  * RectangleB class. Represents a rectangle whose sides are parallel to the axes
- *@author Daniel avidan
- * @version 11/21
  *
+ * @author Daniel avidan
+ * @version 11/21
  */
 
 public class RectangleB {
@@ -20,8 +20,8 @@ public class RectangleB {
      */
 
     public RectangleB(int w, int h) {
-        int height =checkHeightValue(h);
-        int width= checkWidthValue(w);
+        int height = checkHeightValue(h);
+        int width = checkWidthValue(w);
         this._pointSW = new Point(0, 0);
         this._pointNE = new Point(this._pointSW.getX() + width, this._pointSW.getY() + height);
     }
@@ -35,8 +35,8 @@ public class RectangleB {
      */
 
     public RectangleB(Point p, int w, int h) {
-        int height =checkHeightValue(h);
-        int width= checkWidthValue(w);
+        int height = checkHeightValue(h);
+        int width = checkWidthValue(w);
         this._pointSW = new Point(p);
         this._pointNE = new Point(p.getX() + width, p.getY() + height);
     }
@@ -87,6 +87,7 @@ public class RectangleB {
 
     /**
      * Set a new Rectangle width
+     *
      * @param w Rectangle width
      */
     public void setWidth(int w) {
@@ -95,7 +96,6 @@ public class RectangleB {
         } else {
             this._pointNE.setX(this._pointSW.getX() + w);
         }
-
     }
 
     /**
@@ -108,7 +108,6 @@ public class RectangleB {
             System.out.println("Invalid Height");
         } else {
             this._pointNE.setY(this._pointSW.getY() + h);
-            ;
         }
 
     }
@@ -134,14 +133,14 @@ public class RectangleB {
      * @return Rectangle perimeter
      */
     public int getPerimeter() {
-        return 2 * (this.getHeight() + this.getWidth());
+        return 2 * (this.getHeight() + this.getWidth());    //perimeter of a rectangle formula
     }
 
     /**
      * @return Rectangle area
      */
     public int getArea() {
-        return this.getHeight() * this.getWidth();
+        return this.getHeight() * this.getWidth();          //area of rectangle formula
     }
 
     /**
@@ -153,13 +152,13 @@ public class RectangleB {
     public void move(int deltaX, int deltaY) {
         this._pointSW.move(deltaX, deltaY);
         this._pointNE.move(deltaX, deltaY);
-
     }
 
     /**
      * A function that checks if the rectangles are equal
      *
      * @param other RectangleA  object for compare to
+     * @return boolean value true/false
      */
     public boolean equals(RectangleB other) {
         return this.toString().equals(other.toString());
@@ -168,7 +167,7 @@ public class RectangleB {
     /**
      * @return Rectangle diagonalLength
      */
-    public double getDiagonalLength() {
+    public double getDiagonalLength() {                     //calculate diagonal using the distance function
         return getPointNE().distance(getPointSW());
     }
 
@@ -176,6 +175,7 @@ public class RectangleB {
      * A function that checks if the rectangle is larger
      *
      * @param other RectangleA  object for compare to
+     * @return boolean value true/false
      */
     public boolean isLarger(RectangleB other) {
         return this.getArea() > other.getArea();
@@ -192,7 +192,7 @@ public class RectangleB {
      * A function that turns the rectangle
      */
     public void changeSides() {
-        int originalHeight = this._pointNE.getY() - this._pointSW.getY();
+        int originalHeight = this._pointNE.getY() - this._pointSW.getY();      //using auxiliary variable
         this.setHeight(this._pointNE.getX() - this._pointSW.getX());
         this.setWidth(originalHeight);
     }
@@ -201,23 +201,25 @@ public class RectangleB {
      * A function that checks if a rectangle is contained in another rectangle
      *
      * @param r RectangleA  object to check with
+     * @return boolean value true/false
      */
     public boolean isIn(RectangleB r) {
-        return (this.getWidth() <= r.getWidth() && this.getHeight() <= r.getHeight()
-                && this._pointSW.getX() >= r._pointSW.getX() && this.getPointNE().getX() <= r.getPointNE().getX()
-                && this._pointSW.getY() >= r._pointSW.getY() && this.getPointNE().getY() <= r.getPointNE().getY());
+        return (this.getWidth() <= r.getWidth() && this.getHeight() <= r.getHeight()            //first  the width and height must be smaller or equals
+                && this._pointSW.getX() >= r._pointSW.getX() && this.getPointNE().getX() <= r.getPointNE().getX()       //check the x value of each point and verify it's between the sw to ne points
+                && this._pointSW.getY() >= r._pointSW.getY() && this.getPointNE().getY() <= r.getPointNE().getY());     //check the y value of each point and verify it's between the sw to ne points
     }
 
     /**
      * A function that checks the overlap of rectangles
      *
      * @param r RectangleA  object to check with
+     * @return boolean value true/false
      */
     public boolean overlap(RectangleB r) {
-        if (this.getPointNE().isUnder(r.getPointSW())
+        if (this.getPointNE().isUnder(r.getPointSW())           //if  the ne point under the r sw point or the sw point above the r ne point return false
                 || this.getPointSW().isAbove(r.getPointNE())) {
             return false;
-        } else if (this.getPointNE().isLeft(r._pointSW)
+        } else if (this.getPointNE().isLeft(r._pointSW)         //if  the ne point is left from the r sw point or the sw point is right from r ne point return false
                 || this.getPointSW().isRight(r.getPointNE())) {
             return false;
         } else {
@@ -225,15 +227,15 @@ public class RectangleB {
         }
     }
 
-    private int checkWidthValue(int w) {
-        if (w <= INVALID_VALUE) {
+    private int checkWidthValue(int w) {        //using private function for repeat code prevention
+        if (w <= INVALID_VALUE) {               //ensure the width parameter actually positive
             w = DEFAULT_VALUE;
         }
         return w;
     }
 
-    private int checkHeightValue(int h){
-        if (h <= INVALID_VALUE) {
+    private int checkHeightValue(int h) {        //using private function for repeat code prevention
+        if (h <= INVALID_VALUE) {               //ensure the height parameter actually positive
             h = DEFAULT_VALUE;
         }
         return h;
