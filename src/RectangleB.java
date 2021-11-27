@@ -1,132 +1,241 @@
-import javax.naming.NamingEnumeration;
+/**
+ * RectangleB class. Represents a rectangle whose sides are parallel to the axes
+ *@author Daniel avidan
+ * @version 11/21
+ *
+ */
 
 public class RectangleB {
 
-    private Point _pointSW ;
-    private Point _pointNE;
-    private final int DEFAULT_VALUE = 1;
-    private final int INVALID_VALUE = 0;
+    private Point _pointSW;    // Attribute point object pointSW
+    private Point _pointNE;     //Attribute point object pointNE
+    private final int DEFAULT_VALUE = 1;       //Default value for invalid width or height value
+    private final int INVALID_VALUE = 0;       //A number that is not actually positive
 
+    /**
+     * Initializes a RectangleB object whose SW  point is at the beginning of the axes
+     *
+     * @param w Rectangle width
+     * @param h Rectangle height
+     */
 
-
-    public RectangleB(int w, int h){
-        this._pointSW = new Point(0,0);
-
-        this._pointNE = new Point(this._pointSW.getX()+w,this._pointSW.getY()+h);
-        }
-
-    public RectangleB(Point p, int w, int h) {
-        if (w <= INVALID_VALUE) {
-            w = DEFAULT_VALUE;
-        }
-        if (h <= INVALID_VALUE) {
-            h =DEFAULT_VALUE;
-        }
-        this._pointSW = new Point(p);
-        this._pointNE = new Point(p.getX()+w,p.getY()+h);
+    public RectangleB(int w, int h) {
+        int height =checkHeightValue(h);
+        int width= checkWidthValue(w);
+        this._pointSW = new Point(0, 0);
+        this._pointNE = new Point(this._pointSW.getX() + width, this._pointSW.getY() + height);
     }
 
-    public RectangleB(Point sw, Point ne){
+    /**
+     * Initializes a RectangleB object
+     *
+     * @param p a point object pointSW
+     * @param w Rectangle width
+     * @param h Rectangle height
+     */
+
+    public RectangleB(Point p, int w, int h) {
+        int height =checkHeightValue(h);
+        int width= checkWidthValue(w);
+        this._pointSW = new Point(p);
+        this._pointNE = new Point(p.getX() + width, p.getY() + height);
+    }
+
+    /**
+     * Initializes a RectangleB object
+     *
+     * @param sw a point object pointSW
+     * @param ne a point object pointNE
+     */
+
+    public RectangleB(Point sw, Point ne) {
         this._pointSW = new Point(sw);
         this._pointNE = new Point(ne);
-        }
+    }
 
-    public RectangleB(RectangleB r){
+    /**
+     * Copy constructor for Initializes a new RectangleB object preventing aliasing
+     *
+     * @param r a point object pointSW
+     */
+
+    public RectangleB(RectangleB r) {
         this._pointSW = new Point(r._pointSW);
         this._pointNE = new Point(r._pointNE);
     }
 
-    public  int getWidth() {
-        return this._pointNE.getX()-this._pointSW.getX();
+    /**
+     * @return Rectangle width
+     */
+    public int getWidth() {
+        return this._pointNE.getX() - this._pointSW.getX();
     }
 
+    /**
+     * @return Rectangle height
+     */
     public int getHeight() {
-        return this._pointNE.getY()-this._pointSW.getY();
+        return this._pointNE.getY() - this._pointSW.getY();
     }
 
+    /**
+     * @return Point object pointSW of the Rectangle
+     */
     public Point getPointSW() {
         return new Point(this._pointSW);
     }
 
+    /**
+     * Set a new Rectangle width
+     * @param w Rectangle width
+     */
     public void setWidth(int w) {
         if (w <= INVALID_VALUE) {
             System.out.println("Invalid Width");
         } else {
-            this._pointNE.setX(this._pointSW.getX()+w);
+            this._pointNE.setX(this._pointSW.getX() + w);
         }
 
     }
 
+    /**
+     * Set a new Rectangle height
+     *
+     * @param h Rectangle height
+     */
     public void setHeight(int h) {
         if (h <= INVALID_VALUE) {
             System.out.println("Invalid Height");
         } else {
-            this._pointNE.setY(this._pointSW.getY()+h);;
+            this._pointNE.setY(this._pointSW.getY() + h);
+            ;
         }
 
     }
 
+    /**
+     * Set a new Point pointSW
+     *
+     * @param p a point object pointSW
+     */
     public void setPointSW(Point p) {
-        this._pointNE.move(p.getX()-this._pointSW.getX(),p.getY()-this._pointSW.getY());
+        this._pointNE.move(p.getX() - this._pointSW.getX(), p.getY() - this._pointSW.getY());
         this._pointSW = new Point(p);
     }
 
+    /**
+     * @return Rectangle attributes in a string format
+     */
     public String toString() {
         return "Width=" + this.getWidth() + " Height=" + this.getHeight() + " PointSW=" + this.getPointSW();
     }
 
+    /**
+     * @return Rectangle perimeter
+     */
     public int getPerimeter() {
         return 2 * (this.getHeight() + this.getWidth());
     }
 
+    /**
+     * @return Rectangle area
+     */
     public int getArea() {
         return this.getHeight() * this.getWidth();
     }
 
+    /**
+     * use this function  for moving the pointSW
+     *
+     * @param deltaX int  object using for moving the pointSW x value
+     * @param deltaY int  object using for moving the pointSW y value
+     */
     public void move(int deltaX, int deltaY) {
         this._pointSW.move(deltaX, deltaY);
-        this._pointNE.move(deltaX,deltaY);
+        this._pointNE.move(deltaX, deltaY);
 
     }
 
+    /**
+     * A function that checks if the rectangles are equal
+     *
+     * @param other RectangleA  object for compare to
+     */
     public boolean equals(RectangleB other) {
         return this.toString().equals(other.toString());
     }
 
+    /**
+     * @return Rectangle diagonalLength
+     */
     public double getDiagonalLength() {
         return getPointNE().distance(getPointSW());
     }
 
+    /**
+     * A function that checks if the rectangle is larger
+     *
+     * @param other RectangleA  object for compare to
+     */
     public boolean isLarger(RectangleB other) {
         return this.getArea() > other.getArea();
     }
 
+    /**
+     * @return Point object pointNE
+     */
     public Point getPointNE() {
-        return new Point(this._pointSW.getX()+this.getWidth(),this._pointSW.getY()+this.getHeight());
+        return new Point(this._pointSW.getX() + this.getWidth(), this._pointSW.getY() + this.getHeight());
     }
 
+    /**
+     * A function that turns the rectangle
+     */
     public void changeSides() {
-        int originalHeight = this._pointNE.getY()-this._pointSW.getY();
-        this.setHeight(this._pointNE.getX()-this._pointSW.getX());
+        int originalHeight = this._pointNE.getY() - this._pointSW.getY();
+        this.setHeight(this._pointNE.getX() - this._pointSW.getX());
         this.setWidth(originalHeight);
     }
 
+    /**
+     * A function that checks if a rectangle is contained in another rectangle
+     *
+     * @param r RectangleA  object to check with
+     */
     public boolean isIn(RectangleB r) {
         return (this.getWidth() <= r.getWidth() && this.getHeight() <= r.getHeight()
                 && this._pointSW.getX() >= r._pointSW.getX() && this.getPointNE().getX() <= r.getPointNE().getX()
                 && this._pointSW.getY() >= r._pointSW.getY() && this.getPointNE().getY() <= r.getPointNE().getY());
     }
 
+    /**
+     * A function that checks the overlap of rectangles
+     *
+     * @param r RectangleA  object to check with
+     */
     public boolean overlap(RectangleB r) {
         if (this.getPointNE().isUnder(r.getPointSW())
                 || this.getPointSW().isAbove(r.getPointNE())) {
             return false;
-        }
-        else if (this.getPointNE().isLeft(r._pointSW)
+        } else if (this.getPointNE().isLeft(r._pointSW)
                 || this.getPointSW().isRight(r.getPointNE())) {
             return false;
         } else {
             return true;
         }
+    }
+
+    private int checkWidthValue(int w) {
+        if (w <= INVALID_VALUE) {
+            w = DEFAULT_VALUE;
+        }
+        return w;
+    }
+
+    private int checkHeightValue(int h){
+        if (h <= INVALID_VALUE) {
+            h = DEFAULT_VALUE;
+        }
+        return h;
     }
 }

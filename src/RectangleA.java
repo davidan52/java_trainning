@@ -10,7 +10,7 @@
 
 public class RectangleA {
 
-    private int _width;         //// width attribute
+    private int _width;         // width attribute
     private int _height;        //rectangle height attribute
     private Point _pointSW;     //point object pointSW
     private final int DEFAULT_VALUE = 1;    //Default value for invalid width or height value
@@ -63,8 +63,7 @@ public class RectangleA {
     }
     /**
      * Copy constructor for Initializes a new RectangleA object preventing aliasing
-     * @param sw a point object pointSW
-     * @param ne a point object pointNE
+     * @param r a point object pointSW
      */
 
     public RectangleA(RectangleA r) {
@@ -118,7 +117,7 @@ public class RectangleA {
     }
     /**
      * Set a new Point pointSW
-     * @param sw a point object pointSW
+     * @param p a point object pointSW
      */
     public void setPointSW(Point p) {
         this._pointSW = new Point(p);
